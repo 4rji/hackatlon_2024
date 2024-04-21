@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Plans for Budget Student</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+        h1 {
+            font-size: 24px;
+        }
+        section {
+            padding: 20px;
+        }
+        h2 {
+            font-size: 20px;
+            color: #007bff;
+        }
+        p {
+            font-size: 16px;
+        }
+        .button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Future Plans for Budget Student</h1>
+    </header>
+    <section>
+        <h2>AI Budgeting</h2>
+        <p>With our new AI Budgeting feature, we're taking financial management to the next level. Using advanced artificial intelligence algorithms, we'll help optimize your budget and expenses so you can manage your finances more efficiently than ever.</p>
+    </section>
+    <section>
+        <h2>Smart Expenses</h2>
+        <p>With Smart Expenses, we're introducing...</p>
+    </section>
+    <section>
+        <h2>Extra Income</h2>
+        <p>Looking for ways to boost your income? Our Extra Income feature will...</p>
+    </section>
+    <section>
+        <h2>Part-time Jobs</h2>
+        <p>Find flexible part-time job opportunities that fit your schedule and financial needs with our Part-time Jobs feature.</p>
+    </section>
+    <section>
+        <h2>Tuition Calculator</h2>
+        <p>To calculate your tuition, please select your student status:</p>
+        <button class="button" onclick="calculateTuition('instate')">In-State Student</button>
+        <button class="button" onclick="calculateTuition('outstate')">Out-of-State Student</button>
+        <button class="button" onclick="calculateTuition('international')">International Student</button>
+        <div id="tuitionResult"></div>
+    </section>
+    <section>
+        <h2>Connect to USBANK App</h2>
+        <p>Manage your finances seamlessly by connecting Budget Student to your USBANK app.</p>
+        <button class="button">Connect Now</button>
+    </section>
+
+    <script>
+        function calculateTuition(studentType) {
+            // Perform tuition calculation based on student type
+            // Display result in the tuitionResult div
+            let tuition = 0; // Placeholder for tuition calculation
+            switch(studentType) {
+                case 'instate':
+                    tuition = 1000; // Placeholder value for in-state tuition
+                    break;
+                case 'outstate':
+                    tuition = 2000; // Placeholder value for out-of-state tuition
+                    break;
+                case 'international':
+                    tuition = 3000; // Placeholder value for international student tuition
+                    break;
+                default:
+                    break;
+            }
+            document.getElementById('tuitionResult').innerHTML = `<p>Your tuition is: $${tuition}</p>`;
+        }
+    </script>
+</body>
+</html>
