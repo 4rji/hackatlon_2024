@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Expense Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #666;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 4px;
+        }
+        .result.green {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        .result.red {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        .budgetStatus {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .budgetStatus.green {
+            color: green;
+        }
+        .budgetStatus.red {
+            color: red;
+        }
+        .budgetButtons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .budgetButtons button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .budgetButtons button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>College Expense Predictor</h1>
+        <div class="budgetButtons">
+            <button onclick="setBudget(10000)">Budget: $10,000</button>
+            <button onclick="setBudget(20000)">Budget: $20,000</button>
+            <button onclick="setBudget(30000)">Budget: $30,000</button>
+        </div>
+        <form id="expenseForm">
+            <label for="tuition">Tuition (per semester):</label>
+            <input type="number" id="tuition" name="tuition" placeholder="Enter tuition amount" required>
+            
+            <label for="housing">Housing (per month):</label>
+            <input type="number" id="housing" name="housing" placeholder="Enter housing cost" required>
+            
+            <label for="books">Books and Supplies (per semester):</label>
+            <input type="number" id="books" name="books" placeholder="Enter books and supplies cost" required>
+            
+            <label for="food">Food (per month):</label>
+            <input type="number" id="food" name="food" placeholder="Enter food cost" required>
+            
+            <label for="transportation">Transportation (per month):</label>
+            <input type="number" id="transportation" name="transportation" placeholder="Enter transportation cost" required>
+            
+            <input type="submit" value="Predict Expenses">
+        </form>
+        <div class="result" id="expenseResult"></div>
+        <div class="budgetStatus" id="budgetStatus"></div>
+    </div>
+
+    <script>
+        function setBudget(budgetAmount) {
+            document.getElementById('tuition').value = '';
+            document.getElementById('housing').value = '';
+            document.getElementById('books').value = '';
+            document.getElementById('food').value = '';
+            document.getElementById('transportation').value = '';
+            document.getElementById('expenseResult').innerHTML = '';
+            document.getElementById('budgetStatus').textContent = '';
+            document.getElementById('expenseForm').reset();
+            document.getElementById('tuition').focus();
+            document.getElementById('expenseForm').setAttribute('data-budget', budgetAmount);
+        }
+
+        document.getElementById('expenseForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form values
+            var tuition = parseFloat(document.getElementById('tuition').value);
+            var housing = parseFloat(document.getElementById('housing').value);
+            var books = parseFloat(document.getElementById('books').value);
+            var food = parseFloat(document.getElementById('food').value);
+            var transportation = parseFloat(document.getElementById('transportation').value);
+            var budget = parseFloat(document.getElementById('expenseForm').getAttribute('data-budget'));
+
+            // Calculate total expenses
+            var totalExpenses = tuition + (housing * 4) + books + (food * 4) + (transportation * 4);
+
+            // Display result
+            var resultDiv = document.getElementById('expenseResult');
+            resultDiv.innerHTML = '<h2>Predicted Total Expenses:</h2><p>$' + totalExpenses.toFixed(2) + '</p>';
+            if (totalExpenses <= budget) {
+                resultDiv.className = 'result green';
+            } else {
+                resultDiv.className = 'result red';
+            }
+
+            // Display budget status
+            var budgetStatusDiv = document.getElementById('budgetStatus');
+            if (totalExpenses <= budget) {
+                budgetStatusDiv.textContent = 'You are within budget!';
+                budgetStatusDiv.className = 'budgetStatus green';
+            } else {
+                budgetStatusDiv.textContent = 'You have exceeded the budget!';
+                budgetStatusDiv.className = 'budgetStatus red';
+            }
+        });
+    </script>
+</body>
+</html>
